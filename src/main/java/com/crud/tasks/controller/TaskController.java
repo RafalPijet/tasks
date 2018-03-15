@@ -28,8 +28,8 @@ public class TaskController {
         return taskMapper.mapToTaskDto(dbService.getTask(taskId).orElseThrow(TaskNotFoundException::new));
     }
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteTask")
-    public void deleteTask(String taskId) {
-
+    public void deleteTask(@RequestParam Long taskId) throws TaskNotFoundException{
+        dbService.deleteTask(taskId);
     }
     @RequestMapping(method = RequestMethod.PUT, value = "/updateTask")
     public TaskDto updateTask(@RequestBody TaskDto taskDto) {
