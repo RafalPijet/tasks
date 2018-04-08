@@ -79,5 +79,23 @@ public class TrelloClientTest {
         assertEquals("Test task", newCard.getName());
         assertEquals("http://test.com", newCard.getShortUrl());
     }
+    @Test
+    public void shouldReturnEmptyList() {
+        //Given
+        TrelloBoardDto[] trelloBoards = null;
 
+        URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndPoint() + "/members/" + trelloConfig.getTrelloUsername() + "/board")
+                .queryParam("key", trelloConfig.getTrelloApiKey())
+                .queryParam("token", trelloConfig.getTrelloToken())
+                .queryParam("fields", "name,id")
+                .queryParam("lists", "all").build().encode().toUri();
+        when(restTemplate.getForObject(url, TrelloBoardDto[].class)).thenReturn(trelloBoards);
+        //When
+        List<TrelloBoardDto> fetchedTrelloBoardsMyVersion = trelloClient.getTrelloBoards(url);
+        List<TrelloBoardDto> fetchedTrelloBoardsKodillaVersion = trelloClient.getTrelloBoards();
+        //Then
+        assertNull(trelloBoards);
+        assertEquals(0, fetchedTrelloBoardsMyVersion.size());
+        assertEquals(0, fetchedTrelloBoardsKodillaVersion.size());
+    }
 }
