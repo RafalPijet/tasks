@@ -39,16 +39,6 @@ public class TrelloClient {
             return new ArrayList<>();
         }
     }
-    public List<TrelloBoardDto> getTrelloBoards(URI url) {
-
-        try {
-            TrelloBoardDto[] boardsResponse = restTemplate.getForObject(url, TrelloBoardDto[].class);
-            return Arrays.asList(ofNullable(boardsResponse).orElse(new TrelloBoardDto[0]));
-        } catch (RestClientException e) {
-            LOGGER.error(e.getMessage(), e);
-            return new ArrayList<>();
-        }
-    }
 
     private URI createUrl() {
         return  UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndPoint() + "/members/" + trelloConfig.getTrelloUsername() + "/boards")

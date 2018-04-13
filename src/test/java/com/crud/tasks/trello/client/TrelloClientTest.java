@@ -34,6 +34,7 @@ public class TrelloClientTest {
         when(trelloConfig.getTrelloApiEndPoint()).thenReturn("http://test.com");
         when(trelloConfig.getTrelloApiKey()).thenReturn("test");
         when(trelloConfig.getTrelloToken()).thenReturn("test");
+        when(trelloConfig.getTrelloUsername()).thenReturn("test");
     }
     @Test
     public void shouldFetchTrelloBoards() {
@@ -42,14 +43,14 @@ public class TrelloClientTest {
         TrelloBoardDto[] trelloBoards = new TrelloBoardDto[1];
         trelloBoards[0] = new TrelloBoardDto("test_id", "test_board", new ArrayList<>());
 
-        URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndPoint() + "/members/" + trelloConfig.getTrelloUsername() + "/board")
+        URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndPoint() + "/members/" + trelloConfig.getTrelloUsername() + "/boards")
                 .queryParam("key", trelloConfig.getTrelloApiKey())
                 .queryParam("token", trelloConfig.getTrelloToken())
                 .queryParam("fields", "name,id")
                 .queryParam("lists", "all").build().encode().toUri();
         when(restTemplate.getForObject(url, TrelloBoardDto[].class)).thenReturn(trelloBoards);
         //When
-        List<TrelloBoardDto> fetchedTrelloBoards = trelloClient.getTrelloBoards(url);
+        List<TrelloBoardDto> fetchedTrelloBoards = trelloClient.getTrelloBoards();
         //Then
         assertEquals(1, fetchedTrelloBoards.size());
         assertEquals("test_id", fetchedTrelloBoards.get(0).getId());
@@ -84,18 +85,16 @@ public class TrelloClientTest {
         //Given
         TrelloBoardDto[] trelloBoards = null;
 
-        URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndPoint() + "/members/" + trelloConfig.getTrelloUsername() + "/board")
+        URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndPoint() + "/members/" + trelloConfig.getTrelloUsername() + "/boards")
                 .queryParam("key", trelloConfig.getTrelloApiKey())
                 .queryParam("token", trelloConfig.getTrelloToken())
                 .queryParam("fields", "name,id")
                 .queryParam("lists", "all").build().encode().toUri();
         when(restTemplate.getForObject(url, TrelloBoardDto[].class)).thenReturn(trelloBoards);
         //When
-        List<TrelloBoardDto> fetchedTrelloBoardsMyVersion = trelloClient.getTrelloBoards(url);
         List<TrelloBoardDto> fetchedTrelloBoardsKodillaVersion = trelloClient.getTrelloBoards();
         //Then
         assertNull(trelloBoards);
-        assertEquals(0, fetchedTrelloBoardsMyVersion.size());
         assertEquals(0, fetchedTrelloBoardsKodillaVersion.size());
     }
 }
