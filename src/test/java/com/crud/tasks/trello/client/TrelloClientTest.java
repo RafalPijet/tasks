@@ -92,9 +92,9 @@ public class TrelloClientTest {
                 .queryParam("lists", "all").build().encode().toUri();
         when(restTemplate.getForObject(url, TrelloBoardDto[].class)).thenReturn(trelloBoards);
         //When
-        List<TrelloBoardDto> fetchedTrelloBoardsKodillaVersion = trelloClient.getTrelloBoards();
+        List<TrelloBoardDto> fetchedTrelloBoards = trelloClient.getTrelloBoards();
         //Then
         assertNull(trelloBoards);
-        assertEquals(0, fetchedTrelloBoardsKodillaVersion.size());
+        assertEquals(0, fetchedTrelloBoards.size());
     }
 }
