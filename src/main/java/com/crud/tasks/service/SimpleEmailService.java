@@ -31,6 +31,12 @@ public class SimpleEmailService {
     private SimpleMailMessage createMailMessage(final Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
+        if (!mail.getToCc().isEmpty()) {
+            mailMessage.setCc(mail.getToCc());
+            LOGGER.info("The field 'toCc' is not empty");
+        } else {
+            LOGGER.info("The field 'toCc' is empty");
+        }
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
         return mailMessage;
