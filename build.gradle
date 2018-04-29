@@ -40,6 +40,8 @@ dependencies {
 	compile('io.springfox:springfox-swagger-ui:2.7.0')
 	//Mail
 	compile('org.springframework.boot:spring-boot-starter-mail:2.0.1.RELEASE')
+	//mapp to JSON
+	compile('com.google.code.gson:gson:2.8.2')
 
 
 }
