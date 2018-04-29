@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TaskControllerTest {
+public class MyTaskControllerTest {
 
     @InjectMocks
     private TaskController taskController;
