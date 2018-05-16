@@ -11,8 +11,13 @@ public class StaticWebPageController {
     @RequestMapping("/")
     public String index(Map<String, Object> model) {
         model.put("variable", "My Thymeleaf variable");
-        model.put("one", 1);
-        model.put("two", 2);
+        model.put("2", 2);
+        model.put("two", "2");
+        model.put("multi", "*");
+        model.put("add", "+");
+        model.put("sub", "-");
+        model.put("equals", "=");
+        model.put("space", " ");
         return "index";
     }
 }
