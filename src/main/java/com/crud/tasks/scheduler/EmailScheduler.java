@@ -27,6 +27,6 @@ public class EmailScheduler {
         if (size == 1) {
             endText = size + " task";
         }
-        simpleEmailService.send(new Mail(adminConfig.getAdminMail(), "", SUBJECT, "Currently in database you got: " + endText));
+        simpleEmailService.sendReport(new Mail(adminConfig.getAdminMail(), "", SUBJECT, "Currently in database you got: " + endText));
     }
 }
