@@ -38,7 +38,7 @@ public class MailCreatorService {
 
         Context context = new Context();
         context.setVariable("message", message);
-        context.setVariable("tasks_url", "http://localhost:8888/trello_frontend");
+        context.setVariable("tasks_url", "https://rafalpijet.github.io/");
         context.setVariable("button", "Visit WebSite");
         context.setVariable("admin_name", adminConfig.getAdminName());
         context.setVariable("goodbye", "Greetings from your Tasks Application");
@@ -62,7 +62,7 @@ public class MailCreatorService {
         }
         Context context = new Context();
         context.setVariable("message", message);
-        context.setVariable("tasks_url", "http://localhost:8888/trello_frontend");
+        context.setVariable("tasks_url", "https://rafalpijet.github.io/");
         context.setVariable("button", "Check the WebSite");
         context.setVariable("goodbye", "Greetings from your Tasks Application");
         context.setVariable("admin_config", adminConfig);
